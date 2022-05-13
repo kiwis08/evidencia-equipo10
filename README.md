@@ -20,6 +20,19 @@ right_paddle = Turtle()
 ball = Turtle()
 ```
 
+Se inicia con un puntaje de 0 para cada jugador y se crea el turtle para el texto.
+```
+# Score 
+left_paddle_score = 0
+right_paddle_score = 0
+
+score = Turtle()
+score.hideturtle()
+score.penup()
+score.goto(0, 200)
+score.write("Left Player: {}, Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
+```
+
 La configuración incial de la pantalla es de 800x600
 ```
 # Set up the screen
@@ -48,16 +61,14 @@ ball.penup()
 ball.goto(0, 0)
 ```
 
-Para hacer un poco menos predecible el juego se le asigna una dirección al azar a la pelota entre las 4 esquinas de la ventana.
-Decidimos hacer que fuera una funcion porque tambien la utilizaremos cuando se reinicie la pelota.
+Para hacer un poco menos predecible el juego se le asigna una dirección al azar a la pelota entre las 4 esquinas de la ventana
 ```
 def random_ball():
     direction = [-2,2]
     ball.dx = random.choice(direction)
     ball.dy = random.choice(direction)
-
+    
 # Ball directions
-#Selects the direction at random and it can go to any of the 4 corners of the screen
 random_ball()
 ```
 Los movimientos de las paletas y la pelota tienen sus respectivas funciones
@@ -89,57 +100,65 @@ def move_right_paddle_down():
 ```
 
 
-En en esta parte del código podemos ver que el código verifica si las bolas chocan con la paleta derecha, arriba y abajo. si la pelota choca con las paletas, se imprime ``` right collision``` y lo mismo se aplica a la izquierda también.
+Se verifica si la pelota chocan con las paletas, o las paletas de arriba y abajo. Si la pelota choca con las paletas, se invierte su dirección y con un aumento del 10% para subir la velocidad.
 ```  
+# Check for a collision with the left paddle
+def check_left_collision():
+    if ball.xcor() < -340 and ball.ycor() < left_paddle.ycor() + 50 and ball.ycor() > left_paddle.ycor() - 50:
+        ball.dx *= -1.1
+        ball.setx(-340)
+        
 #Check for a collision with the right paddle
 def check_right_collision():
     if ball.xcor() > 350 and ball.ycor() < right_paddle.ycor() + 50 and ball.ycor() > right_paddle.ycor() - 50:
-        ball.dx *= -1
+        ball.dx *= -1.1
         print("right collision")
         ball.setx(350)
 
-#Check for a collision with the top or bottom
+# Check for a collision with the top or bottom
 def check_sides_collision():
     if ball.ycor() > 290 or ball.ycor() < -290:
-        ball.dy *= -1
+        ball.dy *= -1.1
 ```
-La puntuación del juego le permite al usuario mostrar los puntos que los jugadores están ganando mientras juegan. Para que puedan mantener un registro de su progreso. Se calcula si la pelota falla en el lado izquierdo mayor a 350 o en el lado derecho menor a -350.
+La puntuación del juego le permite al usuario mostrar los puntos que los jugadores están ganando mientras juegan. Para que puedan mantener un registro de su progreso. Se calcula si la pelota falla en el lado izquierdo mayor a 340 o en el lado derecho menor a -340.
 ```
-#Game Score
-def game_score():
-    global left_paddle,right_paddle
-    if ball.xcor() and ball.ycor() > 350:
-        ball.dy *= -1
-        left_paddle += 1
-        score.write("Left Player :{} Right Player: {}".format( left_paddle, right_paddle), align="center", font=("Courier", 24, "normal"))
-
-
-    elif ball.xcor() and ball.ycor() < -350:
-        ball.dy *= -1
-        right_paddle += 1
-        score.write("Left Player :{} Right Player: {}".format( left_paddle, right_paddle), align="center", font=("Courier", 24, "normal"))
+def check_score():
+    global left_paddle_score, right_paddle_score
+    if ball.xcor() > 340:
+        left_paddle_score += 1
+        score.clear()
+        score.write("Left Player :{} Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
+        # Reset the ball
+        ball.goto(0, 0)
+        # Reset the ball direction
+        random_ball()
+    elif ball.xcor() < -340:
+        right_paddle_score += 1
+        score.clear()
+        score.write("Left Player :{} Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
+        # Reset the ball
+        ball.goto(0, 0)
+        # Reset the ball direction
+        random_ball()
 ```
-
-Para que el usuario pueda jugar, hemos asignado claves para poder jugar. Como se trata de un juego multijugador, una persona tocará las flechas "arriba" y "abajo" y la otra usará "w" y "s". De esta manera, ambos usuarios pueden jugar el juego simultáneamente con diferentes teclas.
-
+Para mover las paletas, el jugador izquierdo utiliza las teclas 'w' y 's' para subir y bajar respectivamente, mientras que el jugador derecho utiliza las flechas de arriba y abajo.
 ```
-#Listen to keyboard input
+# Listen to keyboard input
 listen()
 onkeypress(move_left_paddle_up, "w")
 onkeypress(move_left_paddle_down, "s")
 onkeypress(move_right_paddle_up, "Up")
 onkeypress(move_right_paddle_down, "Down")
-
 ```
 Una vez que el proceso del código se ejecuta bien, podemos iniciar el juego llamando a todas las funciones usando un ``` while```. Si todo es ```true``` entonces el código se ejecuta bien llamando a todas las funciones.
 
 ```
-#start game
+# Start game
 while True:
     move_ball()
     check_left_collision()
     check_right_collision()
     check_sides_collision()
-    game_score()
+    check_score()
     update()
 ```  
