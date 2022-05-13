@@ -1,17 +1,14 @@
 # Evidencia equipo 10: Pong
-## Sobre el juego
-Explicar como se juega
 
 ## Documentación
 ### Librerías
 
 Se utilizan las librerías [turtle](https://docs.python.org/3/library/turtle.html) y [random](https://docs.python.org/3/library/random.html) 
-
 ```
 from turtle import *
 import random
 ```
-
+### Juego
 Se crean los turtles correspondientes a las paletas y la pelota
 ```
 # Paddles and ball turtles
@@ -33,10 +30,11 @@ score.goto(0, 200)
 score.write("Left Player: {}, Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
 ```
 
-La configuración incial de la pantalla es de 800x600
+La configuración incial de la pantalla es de 800x600 y con el título del juego, 'Pong'
 ```
 # Set up the screen
 setup(width=800, height=600)
+title("Pong")
 ```
 Al iniciar el juego se posicionan las paletas en los lados y la pelota al centro.
 ```
