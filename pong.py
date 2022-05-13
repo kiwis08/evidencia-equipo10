@@ -14,7 +14,7 @@ TODO:
 """
 
 from turtle import *
-
+import random
 
 # Paddles and ball turtles
 left_paddle = Turtle()
@@ -44,8 +44,10 @@ ball.color("black")
 ball.penup()
 ball.goto(0, 0)
 # Ball directions
-ball.dx = 2
-ball.dy = 2
+#Selects the direction at random and it can go to any of the 4 corners of the screen
+direction = [-2,2]
+ball.dx = random.choice(direction)
+ball.dy = random.choice(direction)
 
 # Move the ball
 def move_ball():
