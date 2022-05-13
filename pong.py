@@ -2,15 +2,6 @@
 Yuvan Thirukumaran - A00834121
 Manuel José Ortiz Urueña - A00832807
 Santiago Quihui Rubio - A00832880
-
-
-TODO:
-- Score
-- Fix collision with paddle
-- More comments
-- Randomize ball direction on game start? (Maybe)
-- Make ball faster over time? (Maybe) <- Change speed depending on score
-
 """
 
 from turtle import *
@@ -56,19 +47,23 @@ def move_ball():
 
 # Move the left paddle up
 def move_left_paddle_up():
-    left_paddle.sety(left_paddle.ycor() + 15)
+    if left_paddle.ycor() < 260:
+        left_paddle.sety(left_paddle.ycor() + 15)
 
 # Move the left paddle down
 def move_left_paddle_down():
-    left_paddle.sety(left_paddle.ycor() - 15)
+    if left_paddle.ycor() > -260:
+        left_paddle.sety(left_paddle.ycor() - 15)
 
 # Move the right paddle up
 def move_right_paddle_up():
-    right_paddle.sety(right_paddle.ycor() + 15)
+    if right_paddle.ycor() < 260:
+        right_paddle.sety(right_paddle.ycor() + 15)
 
 # Move the right paddle down
 def move_right_paddle_down():
-    right_paddle.sety(right_paddle.ycor() - 15)
+    if right_paddle.ycor() > -260:
+        right_paddle.sety(right_paddle.ycor() - 15)
 
 # Check for a collision with the left paddle
 def check_left_collision():
