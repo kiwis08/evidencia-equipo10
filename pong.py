@@ -87,6 +87,18 @@ def check_sides_collision():
     if ball.ycor() > 290 or ball.ycor() < -290:
         ball.dy *= -1
 
+def reset_ball():
+    if ball.xcor() > 340:
+        # Reset the ball
+        ball.goto(0, 0)
+        # Reset the ball direction
+        ball.dx *= -1
+    elif ball.xcor() < -340:
+        # Reset the ball
+        ball.goto(0, 0)
+        # Reset the ball direction
+        ball.dx *= -1
+
 # Listen to keyboard input
 listen()
 onkeypress(move_left_paddle_up, "w")
@@ -100,5 +112,6 @@ while True:
     check_left_collision()
     check_right_collision()
     check_sides_collision()
+    reset_ball()
     update()
     
