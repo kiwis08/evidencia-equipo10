@@ -12,6 +12,14 @@ left_paddle = Turtle()
 right_paddle = Turtle()
 ball = Turtle()
 
+# Score 
+left_paddle_score = 0
+right_paddle_score = 0
+
+score = Turtle()
+score.hideturtle()
+score.write("Left Player :{} Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
+
 # Set up the screen
 setup(width=800, height=600)
 
@@ -88,13 +96,20 @@ def check_sides_collision():
         ball.dy *= -1.1
 
 def reset_ball():
+    global left_paddle_score, right_paddle_score
     if ball.xcor() > 340:
         # Reset the ball
+        left_paddle_score += 1
+        score.clear()
+        score.write("Left Player :{} Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
         ball.goto(0, 0)
         # Reset the ball direction
         random_ball()
     elif ball.xcor() < -340:
         # Reset the ball
+        right_paddle_score += 1
+        score.clear()
+        score.write("Left Player :{} Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
         ball.goto(0, 0)
         # Reset the ball direction
         random_ball()
