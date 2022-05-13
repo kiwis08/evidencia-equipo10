@@ -100,18 +100,18 @@ def check_sides_collision():
 
 def check_score():
     global left_paddle_score, right_paddle_score
-    if ball.xcor() > 340:
+    if ball.xcor() > 350:
         left_paddle_score += 1
         score.clear()
-        score.write("Left Player :{} Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
+        score.write("Left Player: {}, Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
         # Reset the ball
         ball.goto(0, 0)
         # Reset the ball direction
         random_ball()
-    elif ball.xcor() < -340:
+    elif ball.xcor() < -350:
         right_paddle_score += 1
         score.clear()
-        score.write("Left Player :{} Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
+        score.write("Left Player: {}, Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
         # Reset the ball
         ball.goto(0, 0)
         # Reset the ball direction
