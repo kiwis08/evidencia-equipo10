@@ -83,3 +83,54 @@ def move_right_paddle_down():
     if right_paddle.ycor() > -260:
         right_paddle.sety(right_paddle.ycor() - 15)
 ```
+
+
+En en esta parte del código podemos ver que el código verifica si las bolas chocan con la paleta derecha, arriba y abajo. si la pelota choca con las paletas, se imprime ``` right collision``` y lo mismo se aplica a la izquierda también.
+```  
+#Check for a collision with the right paddle
+def check_right_collision():
+    if ball.xcor() > 350 and ball.ycor() < right_paddle.ycor() + 50 and ball.ycor() > right_paddle.ycor() - 50:
+        ball.dx *= -1
+        print("right collision")
+        ball.setx(350)
+
+#Check for a collision with the top or bottom
+def check_sides_collision():
+    if ball.ycor() > 290 or ball.ycor() < -290:
+        ball.dy *= -1
+```
+La puntuación del juego le permite al usuario mostrar los puntos que los jugadores están ganando mientras juegan. Para que puedan mantener un registro de su progreso. Se calcula si la pelota falla en el lado izquierdo mayor a 350 o en el lado derecho menor a -350.
+```
+#Game Score
+def game_score():
+    global left_paddle,right_paddle
+    if ball.xcor() and ball.ycor() > 350:
+        ball.dy *= -1
+        left_paddle += 1
+        score.write("Left Player :{} Right Player: {}".format( left_paddle, right_paddle), align="center", font=("Courier", 24, "normal"))
+
+
+    elif ball.xcor() and ball.ycor() < -350:
+        ball.dy *= -1
+        right_paddle += 1
+        score.write("Left Player :{} Right Player: {}".format( left_paddle, right_paddle), align="center", font=("Courier", 24, "normal"))
+```
+
+
+```
+#Listen to keyboard input
+listen()
+onkeypress(move_left_paddle_up, "w")
+onkeypress(move_left_paddle_down, "s")
+onkeypress(move_right_paddle_up, "Up")
+onkeypress(move_right_paddle_down, "Down")
+
+#start game
+while True:
+    move_ball()
+    check_left_collision()
+    check_right_collision()
+    check_sides_collision()
+    game_score()
+    update()
+ ```  
