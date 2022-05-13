@@ -70,16 +70,15 @@ def move_right_paddle_down():
 
 # Check for a collision with the left paddle
 def check_left_collision():
-    if ball.xcor() < -350 and ball.ycor() < left_paddle.ycor() + 50 and ball.ycor() > left_paddle.ycor() - 50:
+    if ball.xcor() < -340 and ball.ycor() < left_paddle.ycor() + 50 and ball.ycor() > left_paddle.ycor() - 50:
         ball.dx *= -1
-        ball.setx(-350)
+        ball.setx(-340)
     
 # Check for a collision with the right paddle
 def check_right_collision():
-    if ball.xcor() > 350 and ball.ycor() < right_paddle.ycor() + 50 and ball.ycor() > right_paddle.ycor() - 50:
+    if ball.xcor() > 340 and ball.ycor() < right_paddle.ycor() + 50 and ball.ycor() > right_paddle.ycor() - 50:
         ball.dx *= -1
-        print("right collision")
-        ball.setx(350)
+        ball.setx(340)
 
 # Check for a collision with the top or bottom
 def check_sides_collision():
