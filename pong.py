@@ -22,6 +22,7 @@ score.write("Left Player :{} Right Player: {}".format( left_paddle_score, right_
 
 # Set up the screen
 setup(width=800, height=600)
+title("Pong")
 
 # Set up the left paddle
 left_paddle.shape("square")
