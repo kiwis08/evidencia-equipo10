@@ -48,13 +48,17 @@ ball.penup()
 ball.goto(0, 0)
 ```
 
-Para hacer un poco menos predecible el juego se le asigna una dirección al azar a la pelota entre las 4 esquinas de la ventana
+Para hacer un poco menos predecible el juego se le asigna una dirección al azar a la pelota entre las 4 esquinas de la ventana.
+Decidimos hacer que fuera una funcion porque tambien la utilizaremos cuando se reinicie la pelota.
 ```
+def random_ball():
+    direction = [-2,2]
+    ball.dx = random.choice(direction)
+    ball.dy = random.choice(direction)
+
 # Ball directions
-# Selects the direction at random and it can go to any of the 4 corners of the screen
-direction = [-2,2]
-ball.dx = random.choice(direction)
-ball.dy = random.choice(direction)
+#Selects the direction at random and it can go to any of the 4 corners of the screen
+random_ball()
 ```
 Los movimientos de las paletas y la pelota tienen sus respectivas funciones
 
