@@ -13,8 +13,17 @@ TODO:
 
 """
 
+from tkinter import CENTER
 from turtle import *
+from xml.dom.expatbuilder import ElementInfo
 
+# Score 
+left_paddle = 0
+right_paddle = 0
+
+score = Turtle()
+score.hideturtle()
+score.write("Left Player :0 Right Player: 0",font=("Courier", 24, "normal"),align='center')
 
 # Paddles and ball turtles
 left_paddle = Turtle()
@@ -64,6 +73,7 @@ def move_left_paddle_down():
 def move_right_paddle_up():
     right_paddle.sety(right_paddle.ycor() + 15)
 
+
 # Move the right paddle down
 def move_right_paddle_down():
     right_paddle.sety(right_paddle.ycor() - 15)
@@ -86,6 +96,22 @@ def check_sides_collision():
     if ball.ycor() > 290 or ball.ycor() < -290:
         ball.dy *= -1
 
+#Game Score
+def game_score():
+    global left_paddle,right_paddle
+    if ball.xcor() and ball.ycor() > 350:
+        ball.dy *= -1
+        left_paddle += 1
+        score.write("Left Player :{} Right Player: {}".format( left_paddle, right_paddle), align="center", font=("Courier", 24, "normal"))
+
+
+    elif ball.xcor() and ball.ycor() < -350:
+        ball.dy *= -1
+        right_paddle += 1
+        score.write("Left Player :{} Right Player: {}".format( left_paddle, right_paddle), align="center", font=("Courier", 24, "normal"))
+
+
+
 # Listen to keyboard input
 listen()
 onkeypress(move_left_paddle_up, "w")
@@ -99,5 +125,6 @@ while True:
     check_left_collision()
     check_right_collision()
     check_sides_collision()
+    game_score()
     update()
     
