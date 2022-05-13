@@ -18,6 +18,8 @@ right_paddle_score = 0
 
 score = Turtle()
 score.hideturtle()
+score.penup()
+score.goto(0, 200)
 score.write("Left Player :{} Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
 
 # Set up the screen
