@@ -39,10 +39,20 @@ right_paddle.penup()
 right_paddle.goto(350, 0)
 
 
+# Set up the ball
+ball.shape("circle")
+ball.color("black")
+ball.penup()
+ball.goto(0, 0)
+
 def random_ball():
     direction = [-2,2]
     ball.dx = random.choice(direction)
     ball.dy = random.choice(direction)
+
+# Ball directions
+#Selects the direction at random and it can go to any of the 4 corners of the screen
+random_ball()
 
 # Move the ball
 def move_ball():
@@ -88,21 +98,12 @@ def reset_ball():
         ball.goto(0, 0)
         # Reset the ball direction
         random_ball()
-
     elif ball.xcor() < -340:
         # Reset the ball
         ball.goto(0, 0)
         # Reset the ball direction
         random_ball()
 
-# Set up the ball
-ball.shape("circle")
-ball.color("black")
-ball.penup()
-ball.goto(0, 0)
-# Ball directions
-#Selects the direction at random and it can go to any of the 4 corners of the screen
-random_ball()
 
 # Listen to keyboard input
 listen()
