@@ -116,6 +116,7 @@ def game_score():
         score.write("Left Player :{} Right Player: {}".format( left_paddle, right_paddle), align="center", font=("Courier", 24, "normal"))
 ```
 
+Para que el usuario pueda jugar, hemos asignado claves para poder jugar. Como se trata de un juego multijugador, una persona tocará las flechas "arriba" y "abajo" y la otra usará "w" y "s". De esta manera, ambos usuarios pueden jugar el juego simultáneamente con diferentes teclas.
 
 ```
 #Listen to keyboard input
@@ -125,6 +126,10 @@ onkeypress(move_left_paddle_down, "s")
 onkeypress(move_right_paddle_up, "Up")
 onkeypress(move_right_paddle_down, "Down")
 
+```
+Una vez que el proceso del código se ejecuta bien, podemos iniciar el juego llamando a todas las funciones usando un ``` while```. Si todo es ```true``` entonces el código se ejecuta bien llamando a todas las funciones.
+
+```
 #start game
 while True:
     move_ball()
@@ -133,4 +138,4 @@ while True:
     check_sides_collision()
     game_score()
     update()
- ```  
+```  
