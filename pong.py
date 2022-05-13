@@ -98,21 +98,21 @@ def check_sides_collision():
     if ball.ycor() > 290 or ball.ycor() < -290:
         ball.dy *= -1.1
 
-def reset_ball():
+def check_score():
     global left_paddle_score, right_paddle_score
     if ball.xcor() > 340:
-        # Reset the ball
         left_paddle_score += 1
         score.clear()
         score.write("Left Player :{} Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
+        # Reset the ball
         ball.goto(0, 0)
         # Reset the ball direction
         random_ball()
     elif ball.xcor() < -340:
-        # Reset the ball
         right_paddle_score += 1
         score.clear()
         score.write("Left Player :{} Right Player: {}".format( left_paddle_score, right_paddle_score), align="center", font=("Courier", 24, "normal"))
+        # Reset the ball
         ball.goto(0, 0)
         # Reset the ball direction
         random_ball()
@@ -131,6 +131,6 @@ while True:
     check_left_collision()
     check_right_collision()
     check_sides_collision()
-    reset_ball()
+    check_score()
     update()
     
